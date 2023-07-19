@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TDP Vista</title>
+    <style>
+        body{
+        
+            background-image: url("https://cdn.wallpapersafari.com/69/17/vyNBCh.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* text-align: center; */
+            padding-top: 100px;
+        }
+        
+        #movies-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .movie {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .movie img {
+            max-width: 200px;
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 ><center>TDP Vista Movie Site</center></h1>
+    <form action="/movies/" method="GET">
+        <label for="searchQuery"><b>Enter movie title:</b></label>
+        <input type="text" id="searchQuery" name="searchQuery" required>
+        <input type="submit" value="Search">
+    </form>
+    <div>
+        <h1>Available Movies</h1>
+    
+    </div>
+    
+    <div id="movies-container"></div>
+
+    <script>
+        const moviesData = {{movies|tojson}};
+    const moviesContainer = document.getElementById('movies-container');
+    for (const movie of moviesData) {
+        const movieDiv = document.createElement('div');
+        movieDiv.classList.add('movie');
+
+        const image = document.createElement('img');
+        image.src = movie.image.url;
+        image.alt = movie.title;
+
+        movieDiv.appendChild(image);
+        moviesContainer.appendChild(movieDiv);
+    }
+    </script>
+</body>
+</html>

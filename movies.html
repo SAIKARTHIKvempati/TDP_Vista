@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask API</title>
+    <style>
+    body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    #movies-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+        display: flex;
+        flex-wrap: wrap;
+        box-shadow: 0px 0px 5px grey;
+    }
+
+    
+    .movie {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 250px;
+        height: auto;
+        border-radius: 7px;
+        overflow: hidden;
+        padding: 10px;
+    }
+    .movie img {
+        max-width: 200px;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+        opacity: 0.8;
+    }
+  </style>
+
+</head>
+<body>
+    <div>
+        
+        <div id="movies-container">
+        </div>
+    </div>
+
+        <script>
+            const moviesData = {{movies|tojson}};
+    
+        const moviesContainer = document.getElementById('movies-container');
+        for (const movie of moviesData) {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie');
+    
+            const image = document.createElement('img');
+            image.src = movie.image.url;
+            image.alt = movie.title;
+            movieDiv.appendChild(image);
+            moviesContainer.appendChild(movieDiv);
+        }
+        </script>
+    
+</body>
+</html>
